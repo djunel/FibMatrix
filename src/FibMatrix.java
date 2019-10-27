@@ -121,6 +121,7 @@ public class FibMatrix {
 
                 }
                 x++;
+                //function for getting the number of bits input number requires
                 int countingbits = countBits(inputSize);
                 /* print data for this size of input */
                 resultsWriter.printf("%6d %6d %15.2f %20d \n",inputSize, countingbits, averageTimePerTrialInBatch, fibResult); // might as well make the columns look nice
@@ -139,21 +140,28 @@ public class FibMatrix {
 
     static long fib(int n)
     {
+       //declare matrix
         long F[][] = new long[][]{{1,1},{1,0}};
-        if (n == 0)
-            return 0;
-        power(F, n-1);
+        //if n = 0, return 1 as Fibonacci number
+        if (n == 0){
+            return 1;
+        }
+        else{
+            //if n > 0, using n as the exponent, multipy the matrix by itself n times
+            power(F, n-1);
+        }
 
         return F[0][0];
     }
 
     static void multiply(long F[][], long M[][])
     {
+        //multiply the two matrices together
         long x =  F[0][0]*M[0][0] + F[0][1]*M[1][0];
         long y =  F[0][0]*M[0][1] + F[0][1]*M[1][1];
         long z =  F[1][0]*M[0][0] + F[1][1]*M[1][0];
         long w =  F[1][0]*M[0][1] + F[1][1]*M[1][1];
-
+        //assign the results to the Fibonacci matrix
         F[0][0] = x;
         F[0][1] = y;
         F[1][0] = z;
@@ -163,6 +171,7 @@ public class FibMatrix {
     static void power(long F[][], int n)
     {
         int i;
+        //declare the temp matrix to the original values to multiply by itself
         long M[][] = new long[][]{{1,1},{1,0}};
 
         // n - 1 times multiply the matrix to {{1,0},{0,1}}
@@ -171,20 +180,24 @@ public class FibMatrix {
     }
 
 
+    //count the number of bits required for current fib number
     static int countBits(int n)
-        {
-            int count = 0;
-            if(n == 0){
-                count = 1;
-            }
-            while (n != 0)
-            {
-                count++;
-                n >>= 1;
-            }
-            //System.out.println("number of bits = " + count);
-            return count;
+    {
+        int count = 0;
+        //if n == 0, count will be 1
+        if(n == 0){
+            count = 1;
         }
-
+        //loop while n does not equal 0
+        while (n != 0)
+        {
+            //each loop add 1 to count
+            count++;
+            //shift n to the left by 1
+            n >>= 1;
+        }
+        //System.out.println("number of bits = " + count);
+        return count;
+    }
 
 }
