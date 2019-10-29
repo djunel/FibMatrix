@@ -124,7 +124,7 @@ public class FibMatrix {
                 //function for getting the number of bits input number requires
                 int countingbits = countBits(inputSize);
                 /* print data for this size of input */
-                resultsWriter.printf("%6d %6d %15.2f %20d \n",inputSize, countingbits, averageTimePerTrialInBatch, fibResult, numberOfTrials); // might as well make the columns look nice
+                resultsWriter.printf("%6d %6d %15.2f %20d %4d\n",inputSize, countingbits, averageTimePerTrialInBatch, fibResult, numberOfTrials); // might as well make the columns look nice
                 resultsWriter.flush();
                 System.out.println(" ....done.");
             }
